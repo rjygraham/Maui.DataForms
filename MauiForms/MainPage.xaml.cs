@@ -6,7 +6,7 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 
-		new PersonForm();
+		BindingContext = new PersonForm();
 	}
 
 	

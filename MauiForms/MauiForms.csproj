@@ -50,6 +50,16 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	  <PackageReference Include="FluentValidation" Version="11.2.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Controls\DatePickerFormField.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\EntryFormField.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

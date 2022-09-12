@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace MauiForms.Forms;
+namespace MauiForms.Forms.Builders;
 
 internal static class FormFieldAccessorCache
 {

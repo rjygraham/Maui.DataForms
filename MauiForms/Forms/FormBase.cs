@@ -1,27 +1,41 @@
-﻿using System.Linq.Expressions;
+﻿using MauiForms.Forms.Builders;
+using MauiForms.Forms.FormFields;
+using MauiForms.Forms.Validation;
+using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 
 namespace MauiForms.Forms;
 
 public abstract class FormBase<TModel>
 {
-    private HashSet<IFormFieldBuilder<TModel>> formFieldBuilders = new HashSet<IFormFieldBuilder<TModel>>();
+    private HashSet<IFormFieldBuilder<TModel>> builders = new HashSet<IFormFieldBuilder<TModel>>();
+    private int currentRow;
 
-    public TModel Model { get; set; }
+    public ObservableCollection<FormFieldBase> Fields { get; init; } = new ObservableCollection<FormFieldBase>();
 
-    public FormBase(TModel model)
+    public TModel Model { get; }
+    public IValidator<TModel> Validator { get; }
+
+    public FormBase(TModel model, IValidator<TModel> validator = null)
     {
         Model = model;
+        Validator = validator;
     }
 
     public IFormFieldBuilder<TModel> FieldFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
     {
         _ = expression ?? throw new ArgumentNullException(nameof(expression));
 
-        return new FormFieldBuilder<TModel, TProperty>(expression);
+        var builder = new FormFieldBuilder<TModel, TProperty>(expression);
+        builders.Add(builder);
+        return builder;
     }
 
-    public void Build()
+    protected void Build()
     {
-
+        foreach (var builder in builders)
+        {
+            Fields.Add(builder.Build(Model, Validator, currentRow));
+        }
     }
 }
