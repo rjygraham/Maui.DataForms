@@ -3,7 +3,7 @@ using FluentValidation.Internal;
 
 namespace MauiForms;
 
-public class PersonValidator : AbstractValidator<Person>, Forms.Validation.IValidator<Person>
+public class PersonValidator : AbstractValidator<Person>, Maui.FluentForms.Validation.IValidator<Person>
 {
     public PersonValidator()
     {
@@ -28,12 +28,12 @@ public class PersonValidator : AbstractValidator<Person>, Forms.Validation.IVali
     }
 
     public bool Validate(Person model, string memberName, out string[] errors)
-    { 
+    {
         var members = new string[] { memberName };
         var validationContext = new ValidationContext<Person>(model, new PropertyChain(), new MemberNameValidatorSelector(members));
 
         var validationResults = Validate(validationContext);
-        
+
         if (validationResults.IsValid)
         {
             errors = Array.Empty<string>();

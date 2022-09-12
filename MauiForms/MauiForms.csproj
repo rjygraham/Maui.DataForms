@@ -54,6 +54,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Maui.FluentForms\Maui.FluentForms.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Controls\DatePickerFormField.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiForms", "MauiForms\MauiForms.csproj", "{E093B74D-0740-41C6-847C-307C117F99D6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.FluentForms", "Maui.FluentForms\Maui.FluentForms.csproj", "{88550E43-5D7E-44E5-B7F2-A197DABFB06E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,11 @@ Global
 		{E093B74D-0740-41C6-847C-307C117F99D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E093B74D-0740-41C6-847C-307C117F99D6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E093B74D-0740-41C6-847C-307C117F99D6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{88550E43-5D7E-44E5-B7F2-A197DABFB06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88550E43-5D7E-44E5-B7F2-A197DABFB06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88550E43-5D7E-44E5-B7F2-A197DABFB06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88550E43-5D7E-44E5-B7F2-A197DABFB06E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88550E43-5D7E-44E5-B7F2-A197DABFB06E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

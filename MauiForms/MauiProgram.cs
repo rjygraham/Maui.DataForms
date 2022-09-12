@@ -1,7 +1,7 @@
-﻿using MauiApp1;
+﻿using Maui.FluentForms;
+using Maui.FluentForms.FormFields;
+using MauiApp1;
 using MauiApp1.Controls;
-using MauiForms.Forms;
-using MauiForms.Forms.FormFields;
 
 namespace MauiForms;
 
@@ -20,6 +20,6 @@ public static class MauiProgram
 			.MapFormFieldContentControl<EntryFormField>(FormFieldNames.Entry)
 			.MapFormFieldContentControl<DatePickerFormField>(FormFieldNames.DatePicker);
 
-        return builder.Build();
+		return builder.Build();
 	}
 }

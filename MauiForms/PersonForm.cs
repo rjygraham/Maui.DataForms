@@ -1,4 +1,4 @@
-﻿using MauiForms.Forms;
+﻿using Maui.FluentForms;
 
 namespace MauiForms;
 
