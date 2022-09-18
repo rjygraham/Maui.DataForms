@@ -5,7 +5,7 @@
              x:Class="MauiForms.MainPage">
 
     <ScrollView>
-        <Grid RowDefinitions="*,*,*" BindableLayout.ItemsSource="{Binding Fields}" VerticalOptions="Start">
+        <Grid RowDefinitions="*,*,*,*" BindableLayout.ItemsSource="{Binding Fields}" VerticalOptions="Start">
             <BindableLayout.ItemTemplateSelector>
                 <forms:FormFieldDataTemplateSelector />
             </BindableLayout.ItemTemplateSelector>

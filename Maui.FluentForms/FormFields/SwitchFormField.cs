@@ -10,7 +10,7 @@ public class SwitchFormField<TModel, TProperty> : FormFieldBase<TModel, TPropert
     {
     }
 
-    internal override void ApplyConfiguration(IFormFieldConfiguration configuration)
+    public override void ApplyConfiguration(IFormFieldConfiguration configuration)
     {
         // no-op
         return;

@@ -16,7 +16,7 @@ public class SliderFormField<TModel, TProperty> : FormFieldBase<TModel, TPropert
     {
     }
 
-    internal override void ApplyConfiguration(IFormFieldConfiguration configuration)
+    public override void ApplyConfiguration(IFormFieldConfiguration configuration)
     {
         var typedConfig = (SliderFormFieldConfiguration)configuration;
 

@@ -7,7 +7,6 @@ namespace Maui.FluentForms.Builders;
 public interface IFormFieldBuilder<TModel>
 {
     ICheckBoxFormFieldBuilder<TModel> AsCheckBox();
-    ICustomTemplateFormFieldBuilder<TModel> AsCustomTemplate(string templateName);
     IDatePickerFormFieldBuilder<TModel> AsDatePicker();
     IEditorFormFieldBuilder<TModel> AsEditor();
     IEntryFormFieldBuilder<TModel> AsEntry();
@@ -26,11 +25,6 @@ public interface ILayoutFieldBuilder
 public interface ICheckBoxFormFieldBuilder<TModel> : ILayoutFieldBuilder
 {
     ICheckBoxFormFieldBuilder<TModel> WithConfiguration(Action<CheckBoxFormFieldConfiguration> configure);
-}
-
-public interface ICustomTemplateFormFieldBuilder<TModel> : ILayoutFieldBuilder
-{
-    ICustomTemplateFormFieldBuilder<TModel> WithConfiguration(Action<CustomTemplateFormFieldConfiguration> configure);
 }
 
 public interface IDatePickerFormFieldBuilder<TModel> : ILayoutFieldBuilder

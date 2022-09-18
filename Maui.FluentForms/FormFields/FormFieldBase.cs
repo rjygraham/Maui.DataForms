@@ -8,19 +8,19 @@ namespace Maui.FluentForms.FormFields;
 
 public abstract class FormFieldBase
 {
-    public string FieldTemplateName { get; init; }
+    public string FormFieldTemplateName { get; init; }
     public int? GridRow { get; protected set; }
     public int? GridRowSpan { get; protected set; }
     public int? GridColumn { get; protected set; }
     public int? GridColumnSpan { get; protected set; }
     public string StyleKey { get; protected set; }
 
-    public FormFieldBase(string fieldTemplateName)
+    public FormFieldBase(string formFieldTemplateName)
     {
-        FieldTemplateName = fieldTemplateName;
+        FormFieldTemplateName = formFieldTemplateName;
     }
 
-    internal abstract void ApplyConfiguration(IFormFieldConfiguration configuration);
+    public abstract void ApplyConfiguration(IFormFieldConfiguration configuration);
 
     internal void ApplyLayoutConfiguration(FormFieldLayoutConfiguration layoutConfiguration, int currentRow)
     {

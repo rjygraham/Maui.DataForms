@@ -58,6 +58,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\CustomFormField.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\DatePickerFormField.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

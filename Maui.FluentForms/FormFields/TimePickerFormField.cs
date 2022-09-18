@@ -12,7 +12,7 @@ public class TimePickerFormField<TModel, TProperty> : FormFieldBase<TModel, TPro
     {
     }
 
-    internal override void ApplyConfiguration(IFormFieldConfiguration configuration)
+    public override void ApplyConfiguration(IFormFieldConfiguration configuration)
     {
         var typedConfig = (TimePickerFormFieldConfiguration)configuration;
 

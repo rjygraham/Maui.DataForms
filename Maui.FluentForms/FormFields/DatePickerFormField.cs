@@ -14,7 +14,7 @@ public class DatePickerFormField<TModel, TProperty> : FormFieldBase<TModel, TPro
     {
     }
 
-    internal override void ApplyConfiguration(IFormFieldConfiguration configuration)
+    public override void ApplyConfiguration(IFormFieldConfiguration configuration)
     {
         var typedConfiguration = (DatePickerFormFieldConfiguration)configuration;
 

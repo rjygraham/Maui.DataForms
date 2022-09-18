@@ -21,7 +21,7 @@ public class EntryFormField<TModel, TProperty> : FormFieldBase<TModel, TProperty
     {
     }
 
-    internal override void ApplyConfiguration(IFormFieldConfiguration configuration)
+    public override void ApplyConfiguration(IFormFieldConfiguration configuration)
     {
         var typedConfig = (EntryFormFieldConfiguration)configuration;
 

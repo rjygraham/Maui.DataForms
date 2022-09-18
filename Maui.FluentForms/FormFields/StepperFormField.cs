@@ -14,7 +14,7 @@ public class StepperFormField<TModel, TProperty> : FormFieldBase<TModel, TProper
     {
     }
 
-    internal override void ApplyConfiguration(IFormFieldConfiguration configuration)
+    public override void ApplyConfiguration(IFormFieldConfiguration configuration)
     {
         var typedConfig = (StepperFormFieldConfiguration)configuration;
 

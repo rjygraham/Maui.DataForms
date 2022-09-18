@@ -26,7 +26,14 @@ public abstract class FormBase<TModel>
     {
         _ = expression ?? throw new ArgumentNullException(nameof(expression));
 
-        var builder = new FormFieldBuilder<TModel, TProperty>(expression);
+        return FieldFor(new FormFieldBuilder<TModel, TProperty>(expression));
+    }
+
+    public TBuilder FieldFor<TBuilder>(TBuilder builder)
+        where TBuilder : IFormFieldBuilder<TModel>
+    {
+        _ = builder ?? throw new ArgumentNullException(nameof(builder));
+
         builders.Add(builder);
         return builder;
     }

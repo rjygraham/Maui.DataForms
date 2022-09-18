@@ -14,7 +14,7 @@ public sealed class EditorFormField<TModel, TProperty> : FormFieldBase<TModel, T
     {
     }
 
-    internal override void ApplyConfiguration(IFormFieldConfiguration configuration)
+    public override void ApplyConfiguration(IFormFieldConfiguration configuration)
     {
         var typedConfig = (EditorFormFieldConfiguration)configuration;
 

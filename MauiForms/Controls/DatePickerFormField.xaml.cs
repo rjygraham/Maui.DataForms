@@ -1,4 +1,4 @@
-namespace MauiApp1;
+namespace MauiForms;
 
 public partial class DatePickerFormField : ContentView
 {

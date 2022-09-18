@@ -1,4 +1,4 @@
-namespace MauiApp1.Controls;
+namespace MauiForms.Controls;
 
 public partial class EntryFormField : ContentView
 {

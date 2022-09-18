@@ -1,5 +1,4 @@
-﻿
-using Maui.FluentForms.Configuration;
+﻿using Maui.FluentForms.Configuration;
 using Maui.FluentForms.Validation;
 
 namespace Maui.FluentForms.FormFields;
@@ -11,7 +10,7 @@ public class CheckBoxFormField<TModel, TProperty> : FormFieldBase<TModel, TPrope
     {
     }
 
-    internal override void ApplyConfiguration(IFormFieldConfiguration configuration)
+    public override void ApplyConfiguration(IFormFieldConfiguration configuration)
     {
         // no-op
         return;

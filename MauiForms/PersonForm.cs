@@ -1,4 +1,5 @@
 ﻿using Maui.FluentForms;
+using MauiForms.CustomFormField;
 
 namespace MauiForms;
 
@@ -42,6 +43,19 @@ public class PersonForm : FormBase<Person>
 			{
 				layout.GridColumn = 0;
 				layout.GridRow = 2;
+			});
+
+		// Demonstrates a custom Form Field
+		FieldFor(new MauiFormsCustomFormFieldBuilder<Person, string>(f => f.CustomProperty))
+			.AsCustomFormField()
+			.WithConfiguration(config =>
+			{
+				config.CustomProperty = "This is a custom Form Field!";
+			})
+			.WithLayout(layout =>
+			{
+				layout.GridColumn = 0;
+				layout.GridRow = 3;
 			});
 
 		Build();
