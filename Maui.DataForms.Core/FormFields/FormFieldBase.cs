@@ -28,16 +28,14 @@ public abstract class FormFieldBase : INotifyPropertyChanged, INotifyPropertyCha
         ControlTemplateName = controlTemplateName;
     }
 
+    public abstract void ApplyConfiguration(IDictionary<string, object> configuration);
     public abstract void ApplyConfiguration(IFormFieldConfiguration configuration);
 
-    public void ApplyLayoutConfiguration(LayoutConfiguration layoutConfiguration, int currentRow)
+    public void ApplyLayoutConfiguration(LayoutConfiguration layoutConfiguration)
     {
         ArgumentNullException.ThrowIfNull(layoutConfiguration);
 
-        GridRow = layoutConfiguration.GridRow == -1
-            ? currentRow
-            : layoutConfiguration.GridRow;
-
+        GridRow = layoutConfiguration.GridRow;
         GridColumn = layoutConfiguration.GridColumn;
         GridRowSpan = layoutConfiguration.GridRowSpan;
         GridColumnSpan = layoutConfiguration.GridColumnSpan;
@@ -58,7 +56,7 @@ public abstract class FormFieldBase : INotifyPropertyChanged, INotifyPropertyCha
     /// <summary>
     /// Raises the <see cref="PropertyChanging"/> event.
     /// </summary>
-    /// <param name="e">The input <see cref="PropertyChangingEventArgs"/> instance.</param>
+    /// <param name="e">The input <see cref="System.ComponentModel.PropertyChangingEventArgs"/> instance.</param>
     /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="e"/> is <see langword="null"/>.</exception>
     protected virtual void OnPropertyChanging(System.ComponentModel.PropertyChangingEventArgs e)
     {
@@ -121,9 +119,8 @@ public abstract class FormFieldBase<TProperty> : FormFieldBase
 
 public abstract class FormFieldBase<TModel, TProperty> : FormFieldBase<TProperty>
 {
-    private readonly IDictionary<string, object> dictionaryModel;
+    private readonly TModel model;
 
-    private readonly TModel stronglyTypedModel;
     private readonly Func<TModel, TProperty> stronglyTypedModelPropertyGetter;
     private readonly Action<TModel, TProperty> stronglyTypedModelPropertySetter;
 
@@ -131,59 +128,72 @@ public abstract class FormFieldBase<TModel, TProperty> : FormFieldBase<TProperty
 
     private readonly string formFieldName;
 
-    private readonly IModelValidator<TModel> validator;
+    private readonly IFormFieldValidator<TModel> validator;
 
-    protected FormFieldBase(TModel model, string formFieldName, string controlTemplateName, ValidationMode validationMode, IModelValidator<TModel> validator = null)
+    private FormFieldBase(TModel model, string formFieldName, bool isStronglyTypedModel, string controlTemplateName, ValidationMode validationMode, IFormFieldValidator<TModel> validator = null)
         : base(controlTemplateName, validationMode)
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(formFieldName);
 
+        this.model = model;
+        this.formFieldName = formFieldName;
+        this.isStronglyTypedModel = false;
+        this.validator = validator;
+    }
+
+    protected FormFieldBase(TModel model, string formFieldName, string controlTemplateName, ValidationMode validationMode, IFormFieldValidator<TModel> validator = null)
+        : this(model, formFieldName, false, controlTemplateName, validationMode, validator)
+    {
         if (model is not IDictionary<string, object>)
         {
             throw new ArgumentException("Parameter type must implement IDictionary<string, object> for this constructor overload.", nameof(model));
         }
-
-        this.dictionaryModel = (IDictionary<string, object>)model;
-        this.formFieldName = formFieldName;
-        this.validator = validator;
-
-        this.isStronglyTypedModel = false;
     }
 
-    public FormFieldBase(TModel model, string formFieldName, Func<TModel, TProperty> getter, Action<TModel, TProperty> setter, string controlTemplateName, ValidationMode validationMode, IModelValidator<TModel> validator = null)
-        : base(controlTemplateName, validationMode)
+    public FormFieldBase(TModel model, string formFieldName, Func<TModel, TProperty> getter, Action<TModel, TProperty> setter, string controlTemplateName, ValidationMode validationMode, IFormFieldValidator<TModel> validator = null)
+        : this(model, formFieldName, true, controlTemplateName, validationMode, validator)
     {
-        ArgumentNullException.ThrowIfNull(model);
-        ArgumentNullException.ThrowIfNull(formFieldName);
         ArgumentNullException.ThrowIfNull(getter);
         ArgumentNullException.ThrowIfNull(setter);
 
-        this.stronglyTypedModel = model;
-        this.formFieldName = formFieldName;
         this.stronglyTypedModelPropertyGetter = getter;
         this.stronglyTypedModelPropertySetter = setter;
-        this.validator = validator;
-
-        this.isStronglyTypedModel = true;
     }
 
     protected override TProperty GetValue()
     {
-        return isStronglyTypedModel
-            ? stronglyTypedModelPropertyGetter(stronglyTypedModel)
-            : (TProperty)dictionaryModel[formFieldName];
+        try
+        {
+            return isStronglyTypedModel
+            ? stronglyTypedModelPropertyGetter(model)
+            : GetDictionaryValue(formFieldName);
+        }
+        catch
+        {
+            return default;
+        }
+    }
+
+    protected TProperty GetDictionaryValue(string formFieldName)
+    {
+        if (((IDictionary<string, object>)model).TryGetValue(formFieldName, out var value) && value is not null)
+        {
+            return (TProperty)value;
+        }
+
+        return default;
     }
 
     protected override void SetValue(TProperty value)
     {
         if (isStronglyTypedModel)
         {
-            stronglyTypedModelPropertySetter(stronglyTypedModel, value);
+            stronglyTypedModelPropertySetter(model, value);
         }
         else
         {
-            dictionaryModel[formFieldName] = value;
+            ((IDictionary<string, object>)model)[formFieldName] = value;
         }
     }
 
@@ -194,12 +204,13 @@ public abstract class FormFieldBase<TModel, TProperty> : FormFieldBase<TProperty
             return;
         }
 
-        Errors.Clear();
-        string[] errors;
+        var validationResult = validator.Validate(model, formFieldName);
 
-        if (!validator.Validate(stronglyTypedModel, formFieldName, out errors))
+        Errors.Clear();
+
+        if (!validationResult.IsValid)
         {
-            foreach (var error in errors)
+            foreach (var error in validationResult.Errors)
             {
                 Errors.Add(error);
             }

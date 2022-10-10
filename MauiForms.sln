@@ -9,11 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.FluentForms", "Maui.Fl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormsSample", "DynamicFormsSample\DynamicFormsSample.csproj", "{009B5BEB-3E24-4226-A9F0-5CC5812AE0FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Sandbox\Sandbox.csproj", "{D5BF8B4A-B0FA-4E65-A876-0F20779CAB5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.DataForms.Core", "Maui.DataForms.Core\Maui.DataForms.Core.csproj", "{E05D8767-6D43-4456-9916-A342537AF7E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.DataForms.Core", "Maui.DataForms.Core\Maui.DataForms.Core.csproj", "{E05D8767-6D43-4456-9916-A342537AF7E4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.DataForms.Dynamic", "Maui.DataForms.Dynamic\Maui.DataForms.Dynamic.csproj", "{39C0435A-773F-435B-9CCE-91D209B66DE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.DataForms.Dynamic", "Maui.DataForms.Dynamic\Maui.DataForms.Dynamic.csproj", "{39C0435A-773F-435B-9CCE-91D209B66DE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,10 +36,6 @@ Global
 		{009B5BEB-3E24-4226-A9F0-5CC5812AE0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{009B5BEB-3E24-4226-A9F0-5CC5812AE0FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{009B5BEB-3E24-4226-A9F0-5CC5812AE0FD}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{D5BF8B4A-B0FA-4E65-A876-0F20779CAB5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5BF8B4A-B0FA-4E65-A876-0F20779CAB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5BF8B4A-B0FA-4E65-A876-0F20779CAB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5BF8B4A-B0FA-4E65-A876-0F20779CAB5D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E05D8767-6D43-4456-9916-A342537AF7E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E05D8767-6D43-4456-9916-A342537AF7E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E05D8767-6D43-4456-9916-A342537AF7E4}.Release|Any CPU.ActiveCfg = Release|Any CPU

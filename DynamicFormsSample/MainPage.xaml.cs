@@ -1,4 +1,5 @@
-﻿using DynamicFormsSample.Forms.Models;
+﻿using Maui.DataForms.Models;
+using Maui.DataForms;
 using System.Text.Json;
 
 namespace DynamicFormsSample
@@ -8,26 +9,38 @@ namespace DynamicFormsSample
         public MainPage()
         {
             InitializeComponent();
-        }
 
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            var dynamicForm = JsonSerializer.Deserialize<FormDefiniton>(dynamicFormJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            options.Converters.Add(new SystemObjectNewtonsoftCompatibleConverter());
 
+            var dataFormDefinition = JsonSerializer.Deserialize<DataFormDefiniton>(dynamicFormJson, options);
+
+            BindingContext = DynamicDataForm.Create(dataFormDefinition);
         }
 
         private string dynamicFormJson = """
         {
             "id": "e5d97ee7-500c-4fbf-88aa-6ddbd74691e8",
+            "name": "Person Form",
             "etag": 1664738021,
-            "fields": {
-                "firstName": {
+            "remoteUri": "",
+            "fields": [
+                {
+                    "id": "firstName",
+                    "name": "First Name",
                     "dataType": "string",
                     "controlTemplateName": "Entry",
-                    "validationRules": {
-                        "notEmpty": true,
-                        "maximumLength": 20
-                    },
+                    "validationMode": 0,
+                    "validationRules": [
+                        {
+                            "ruleName": "notEmpty",
+                            "errorMessageFormat": "First Name must not be empty."
+                        },
+                        {
+                            "ruleName": "maximumLength",
+                            "ruleValue": 20
+                        }
+                    ],
                     "configuration": {
                         "placeholder": "First Name"
                     },
@@ -36,13 +49,22 @@ namespace DynamicFormsSample
                         "gridRow": 0
                     }
                 },
-                "lastName": {
+                {
+                    "id": "lastName",
+                    "name": "Last Name",
                     "dataType": "string",
                     "controlTemplateName": "Entry",
-                    "validationRules": {
-                        "notEmpty": true,
-                        "maximumLength": 20
-                    },
+                    "validationMode": 0,
+                    "validationRules": [
+                        {
+                            "ruleName": "notEmpty"
+                        },
+                        {
+                            "ruleName": "maximumLength",
+                            "ruleValue": 20,
+                            "errorMessageFormat": "Last Name must not be longer than {0} characters."
+                        }
+                    ],
                     "configuration": {
                         "placeholder": "Last Name"
                     },
@@ -51,22 +73,28 @@ namespace DynamicFormsSample
                         "gridRow": 1
                     }
                 },
-                "dateOfBirth": {
-                    "dataType": "DateTimeOffset",
+                {
+                    "id": "dateOfBirth",
+                    "name": "Date Of Birth",
+                    "dataType": "DateTime",
                     "controlTemplateName": "DatePicker",
-                    "validationRules": {
-                        "greaterThanOrEqual": "9/20/2004 1:29:57 AM +00:00"
-                    },
+                    "validationMode": 0,
+                    "validationRules": [
+                        {
+                            "ruleName": "greaterThanOrEqual",
+                            "ruleValue": "2004-09-20T01:29:57"
+                        }
+                    ],
                     "configuration": {
-                        "minimumDate": "9/20/2004 1:29:57 AM +00:00",
-                        "maximumDate": "9/20/2022 1:29:57 AM +00:00"
+                        "minimumDate": "2004-09-20T01:29:57",
+                        "maximumDate": "2022-09-20T01:29:57"
                     },
                     "layout": {
                         "gridColumn": 0,
                         "gridRow": 2
                     }
                 }
-            }
+            ]
         }
         """;
     }

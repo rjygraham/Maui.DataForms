@@ -16,14 +16,53 @@ public class EntryFormField<TModel, TProperty> : FormFieldBase<TModel, TProperty
     public object ReturnCommandParameter { get; set; }
     public ReturnType ReturnType { get; set; }
 
-    public EntryFormField(TModel model, string formFieldName, ValidationMode validationMode, IModelValidator<TModel> validator = null)
+    public EntryFormField(TModel model, string formFieldName, ValidationMode validationMode, IFormFieldValidator<TModel> validator = null)
         : base(model, formFieldName, FormFieldNames.Entry, validationMode, validator)
     {
     }
 
-    public EntryFormField(TModel model, string memberName, Func<TModel, TProperty> getter, Action<TModel, TProperty> setter, ValidationMode validationMode, IModelValidator<TModel> validator = null)
+    public EntryFormField(TModel model, string memberName, Func<TModel, TProperty> getter, Action<TModel, TProperty> setter, ValidationMode validationMode, IFormFieldValidator<TModel> validator = null)
     : base(model, memberName, getter, setter, FormFieldNames.Entry, validationMode, validator)
     {
+    }
+
+    public override void ApplyConfiguration(IDictionary<string, object> configuration)
+    {
+        ClearButtonVisibility = configuration.TryGetValue(nameof(ClearButtonVisibility), out object clearButtonVisibility)
+            ? (ClearButtonVisibility)clearButtonVisibility
+            : ClearButtonVisibility.Never;
+
+        FontAutoScalingEnabled = configuration.TryGetValue(nameof(FontAutoScalingEnabled), out object fontAutoScalingEnabled)
+            ? (bool)fontAutoScalingEnabled
+            : true;
+
+        Keyboard = configuration.TryGetValue(nameof(Keyboard), out object keyboard)
+            ? (Keyboard)keyboard
+            : Keyboard.Default;
+
+        IsPassword = configuration.TryGetValue(nameof(IsPassword), out object isPassword)
+            ? (bool)isPassword
+            : false;
+
+        IsTextPredictionEnabled = configuration.TryGetValue(nameof(IsTextPredictionEnabled), out object isTextPredictionEnabled)
+            ? (bool)isTextPredictionEnabled
+            : true;
+
+        Placeholder = configuration.TryGetValue(nameof(Placeholder), out object placeholder)
+            ? (string)placeholder
+            : string.Empty;
+
+        ReturnCommand = configuration.TryGetValue(nameof(ReturnCommand), out object returnCommand)
+            ? (ICommand)returnCommand
+            : null;
+
+        ReturnCommandParameter = configuration.TryGetValue(nameof(ReturnCommandParameter), out object returnCommandParameter)
+            ? returnCommandParameter
+            : null;
+
+        ReturnType = configuration.TryGetValue(nameof(ReturnType), out object returnType)
+            ? (ReturnType)returnType
+            : ReturnType.Default;
     }
 
     public override void ApplyConfiguration(IFormFieldConfiguration configuration)
