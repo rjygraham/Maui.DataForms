@@ -21,7 +21,7 @@
             <Grid
                 Grid.Row="1"
                 BindableLayout.ItemsSource="{Binding PersonDataForm.Fields}"
-                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                RowDefinitions="*,*,*,*,*,*,*,*,*"
                 VerticalOptions="Start">
                 <BindableLayout.ItemTemplateSelector>
                     <mdfc:DataFormsDataTemplateSelector />

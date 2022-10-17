@@ -18,6 +18,6 @@ public partial class FluentDemoPageViewModel : ObservableObject
 	[RelayCommand]
 	private async Task Submit()
 	{
-		// no-op
+		// no-op for now.
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Maui.DataForms.Models;
 using System.Text.Json;
 
@@ -17,6 +18,12 @@ public partial class DynamicDemoPageViewModel : ObservableObject
         var dataFormDefinition = JsonSerializer.Deserialize<DataFormDefiniton>(json, options);
 
         PersonDataForm = DynamicDataForm.Create(dataFormDefinition);
+    }
+
+    [RelayCommand]
+    private async Task Submit()
+    {
+        // no-op for now.
     }
 
     private const string json =
