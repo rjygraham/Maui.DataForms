@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Maui.DataForms.Sample.Views.FluentDemoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mdfc="clr-namespace:Maui.DataForms.Controls;assembly=Maui.DataForms.Core"
+    xmlns:viewModels="clr-namespace:Maui.DataForms.Sample.ViewModels"
+    Title="Fluent Demo"
+    x:DataType="viewModels:FluentDemoPageViewModel">
+
+    <ScrollView>
+        <Grid
+            Margin="20"
+            RowDefinitions="Auto,Auto,Auto"
+            RowSpacing="10">
+            <Label
+                Grid.Row="0"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="The data form below was generated using a model class and is validated using FluentValidation." />
+            <Grid
+                Grid.Row="1"
+                BindableLayout.ItemsSource="{Binding PersonDataForm.Fields}"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                VerticalOptions="Start">
+                <BindableLayout.ItemTemplateSelector>
+                    <mdfc:DataFormsDataTemplateSelector />
+                </BindableLayout.ItemTemplateSelector>
+            </Grid>
+            <Button
+                Grid.Row="2"
+                Command="{Binding SubmitCommand}"
+                Text="Submit" />
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

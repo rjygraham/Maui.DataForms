@@ -2,5 +2,5 @@
 
 public interface IDataFormValidator<TModel> : IFormFieldValidator<TModel>
 {
-    DataFormValidationResult Validate(TModel model);
+    DataFormValidationResult ValidateForm(TModel model);
 }

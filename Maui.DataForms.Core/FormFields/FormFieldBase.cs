@@ -138,7 +138,7 @@ public abstract class FormFieldBase<TModel, TProperty> : FormFieldBase<TProperty
 
         this.model = model;
         this.formFieldName = formFieldName;
-        this.isStronglyTypedModel = false;
+        this.isStronglyTypedModel = isStronglyTypedModel;
         this.validator = validator;
     }
 
@@ -204,7 +204,7 @@ public abstract class FormFieldBase<TModel, TProperty> : FormFieldBase<TProperty
             return;
         }
 
-        var validationResult = validator.Validate(model, formFieldName);
+        var validationResult = validator.ValidateField(model, formFieldName);
 
         Errors.Clear();
 

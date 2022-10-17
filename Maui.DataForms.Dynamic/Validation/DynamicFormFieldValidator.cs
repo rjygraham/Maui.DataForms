@@ -11,7 +11,7 @@ public class DynamicFormFieldValidator<TProperty> : IFormFieldValidator<IDiction
         this.validationRules = validationRules;
     }
 
-    public FormFieldValidationResult Validate(IDictionary<string, object> model, string formFieldName)
+    public FormFieldValidationResult ValidateField(IDictionary<string, object> model, string formFieldName)
     {
         var isValid = true;
         var errors = new List<string>();

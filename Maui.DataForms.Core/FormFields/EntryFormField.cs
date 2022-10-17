@@ -8,9 +8,9 @@ public class EntryFormField<TModel, TProperty> : FormFieldBase<TModel, TProperty
 {
     public ClearButtonVisibility ClearButtonVisibility { get; set; }
     public bool FontAutoScalingEnabled { get; set; }
-    public Keyboard Keyboard { get; set; }
     public bool IsPassword { get; set; }
     public bool IsTextPredictionEnabled { get; set; }
+    public Keyboard Keyboard { get; set; }
     public string Placeholder { get; set; }
     public ICommand ReturnCommand { get; set; }
     public object ReturnCommandParameter { get; set; }
@@ -36,10 +36,6 @@ public class EntryFormField<TModel, TProperty> : FormFieldBase<TModel, TProperty
             ? (bool)fontAutoScalingEnabled
             : true;
 
-        Keyboard = configuration.TryGetValue(nameof(Keyboard), out object keyboard)
-            ? (Keyboard)keyboard
-            : Keyboard.Default;
-
         IsPassword = configuration.TryGetValue(nameof(IsPassword), out object isPassword)
             ? (bool)isPassword
             : false;
@@ -47,6 +43,10 @@ public class EntryFormField<TModel, TProperty> : FormFieldBase<TModel, TProperty
         IsTextPredictionEnabled = configuration.TryGetValue(nameof(IsTextPredictionEnabled), out object isTextPredictionEnabled)
             ? (bool)isTextPredictionEnabled
             : true;
+
+        Keyboard = configuration.TryGetValue(nameof(Keyboard), out object keyboard)
+           ? (Keyboard)keyboard
+           : Keyboard.Default;
 
         Placeholder = configuration.TryGetValue(nameof(Placeholder), out object placeholder)
             ? (string)placeholder
@@ -71,9 +71,9 @@ public class EntryFormField<TModel, TProperty> : FormFieldBase<TModel, TProperty
 
         ClearButtonVisibility = typedConfig.ClearButtonVisibility;
         FontAutoScalingEnabled = typedConfig.FontAutoScalingEnabled;
-        Keyboard = typedConfig.Keyboard;
         IsPassword = typedConfig.IsPassword;
         IsTextPredictionEnabled = typedConfig.IsTextPredictionEnabled;
+        Keyboard = typedConfig.Keyboard;
         Placeholder = typedConfig.Placeholder;
         ReturnCommand = typedConfig.ReturnCommand;
         ReturnCommandParameter = typedConfig.ReturnCommandParameter;

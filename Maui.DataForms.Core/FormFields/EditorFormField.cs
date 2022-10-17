@@ -7,6 +7,7 @@ public sealed class EditorFormField<TModel, TProperty> : FormFieldBase<TModel, T
 {
     public EditorAutoSizeOption AutoSize { get; set; }
     public bool IsTextPredictionEnabled { get; set; }
+    public Keyboard Keyboard { get; set; }
     public string Placeholder { get; set; }
 
     public EditorFormField(TModel model, string formFieldName, ValidationMode validationMode, IFormFieldValidator<TModel> validator = null)
@@ -29,6 +30,10 @@ public sealed class EditorFormField<TModel, TProperty> : FormFieldBase<TModel, T
             ? (bool)isTextPredictionEnabled
             : true;
 
+        Keyboard = configuration.TryGetValue(nameof(Keyboard), out object keyboard)
+            ? (Keyboard)keyboard
+            : Keyboard.Default;
+
         Placeholder = configuration.TryGetValue(nameof(Placeholder), out object placeholder)
             ? (string)placeholder
             : string.Empty;
@@ -40,6 +45,7 @@ public sealed class EditorFormField<TModel, TProperty> : FormFieldBase<TModel, T
 
         AutoSize = typedConfig.AutoSize;
         IsTextPredictionEnabled = typedConfig.IsTextPredictionEnabled;
+        Keyboard = typedConfig.Keyboard;
         Placeholder = typedConfig.Placeholder;
     }
 }

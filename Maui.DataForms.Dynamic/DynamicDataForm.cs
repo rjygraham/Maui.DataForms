@@ -3,7 +3,6 @@ using Maui.DataForms.FormFields;
 using Maui.DataForms.Models;
 using Maui.DataForms.Validation;
 using System.Collections.ObjectModel;
-using System.Text.Json;
 
 namespace Maui.DataForms;
 
@@ -39,6 +38,7 @@ public class DynamicDataForm
         [DataTypeNames.Short] = typeof(short),
         [DataTypeNames.String] = typeof(string),
         [DataTypeNames.TimeOnly] = typeof(TimeOnly),
+        [DataTypeNames.TimeSpan] = typeof(TimeSpan),
         [DataTypeNames.Uint] = typeof(uint),
         [DataTypeNames.Ulong] = typeof(ulong),
         [DataTypeNames.Ushort] = typeof(ushort),
@@ -102,7 +102,7 @@ public class DynamicDataForm
             else
             {
                 form.Model[fieldDefinition.Id] = null;
-            } 
+            }
         }
 
         return form;

@@ -2,5 +2,5 @@
 
 public interface IFormFieldValidator<TModel>
 {
-    FormFieldValidationResult Validate(TModel model, string formFieldName);
+    FormFieldValidationResult ValidateField(TModel model, string formFieldName);
 }

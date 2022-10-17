@@ -15,6 +15,7 @@ public static class DataTypeNames
     public const string Short = "short";
     public const string String = "string";
     public const string TimeOnly = "TimeOnly";
+    public const string TimeSpan = "TimeSpan";
     public const string Uint = "uint";
     public const string Ulong = "ulong";
     public const string Ushort = "ushort";
@@ -30,6 +31,7 @@ public static class DataTypeNames
     public const string NullableLong = "long?";
     public const string NullableShort = "short?";
     public const string NullableTimeOnly = "TimeOnly?";
+    public const string NullableTimeSpan = "TimeSpan?";
     public const string NullableUint = "uint?";
     public const string NullableUlong = "ulong?";
     public const string NullableUshort = "ushort?";
