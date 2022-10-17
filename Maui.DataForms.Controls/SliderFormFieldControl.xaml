@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Maui.DataForms.Controls.SliderFormFieldControl"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Grid.Row="{Binding GridRow}"
+    Grid.RowSpan="{Binding GridRowSpan}"
+    Grid.Column="{Binding GridColumn}"
+    Grid.ColumnSpan="{Binding GridColumnSpan}">
+    <VerticalStackLayout>
+        <Slider
+            DragCompletedCommand="{Binding DragCompletedCommand}"
+            DragStartedCommand="{Binding DragStartedCommand}"
+            Maximum="{Binding Maximum}"
+            Minimum="{Binding Minimum}"
+            Value="{Binding Path=Value, Mode=TwoWay}" />
+        <CollectionView ItemsSource="{Binding Errors}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentView>
